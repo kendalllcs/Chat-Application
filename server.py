@@ -6,10 +6,8 @@ def get_input(prompt):
 
 def main():
     # Get user input for IP address, port, and username
-    ip = get_input("Enter IP address (press enter for localhost): ")
-    ip = ip or '127.0.0.1'  # Default to localhost if empty
-    port = get_input("Enter port number (press enter for default port): ")
-    port = int(port) if port else 65432  # Default port
+    ip = '127.0.0.1'  # Default to localhost
+    port = 65432  # Default port
     username = input("Enter your username: ")
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:

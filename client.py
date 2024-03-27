@@ -15,8 +15,11 @@ def main():
         print("Connected to server")
 
         while True:
-            message = input("Send a message: ")
+            message = input("Send a message (or type 'exit' to quit): ")
             client_socket.sendall(message.encode())
+
+            if message.lower() == 'exit':
+                break
 
             data = client_socket.recv(1024).decode()
             print(f"Server: {data}")
