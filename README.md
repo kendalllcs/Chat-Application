@@ -1,5 +1,8 @@
 # Chat Application
 
+## Requirements Install
+# pip intsall -r requirements.txt
+
 ## Project Description
 In this project, you will develop a chat application that enables text messaging between a server and a client. The application is written in Python using the socket module.
 
