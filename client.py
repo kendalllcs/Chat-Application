@@ -3,7 +3,6 @@ import socket
 from rich.console import Console
 from datetime import datetime
 import threading
-import pyautogui
 
 console = Console()
 console_lock = threading.Lock()
@@ -31,16 +30,10 @@ def receive_messages(sock):
     except Exception as e:
         console.print(f"Error in receive_messages: {e}", style="red")
 
-def save_chat_history():
-    screenshot = pyautogui.screenshot()
-    screenshot.save('chat_history.png')
-    console.print("[bold green]Chat history saved to 'chat_history.png'[/bold green]")
-
 def main():
     clear_screen()
     console.print("[center][bold cyan]--Chat-Application--[/bold cyan][/center]")
     console.print("[center]To send a message just type it and press enter[/center]", style="bold cyan")
-    console.print("[center]input 'ca-save' to save entire chat[/center]", style="bold cyan")
 
     ip = get_input("Enter server IP address (or press enter for localhost): ", '127.0.0.1')
     port = get_input("Enter server port number (or press enter for default port 65432): ", '65432')
@@ -65,8 +58,6 @@ def main():
                     client_socket.sendall('exit'.encode())
                     exit_event.set()  # Set exit event to signal thread to exit
                     break
-                elif message.lower() == 'ca-save':
-                    save_chat_history()
                 else:
                     timestamp = datetime.now().strftime('%H:%M:%S')
                     client_socket.sendall(f"{timestamp}|{username}|{message}".encode())

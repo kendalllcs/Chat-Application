@@ -34,7 +34,6 @@ def main():
     clear_screen()
     console.print("[center][bold cyan]--Chat-Application--[/bold cyan][/center]")
     console.print("[center]To send a message just type it and press enter[/center]", style="bold cyan")
-    console.print("[center]input 'ca-save' to save entire chat[/center]", style="bold cyan")
 
     ip = get_server_input("Enter IP address (or press enter for localhost): ", '127.0.0.1')
     port = get_server_input("Enter port number (or press enter for default port 65432): ", '65432')
@@ -64,10 +63,6 @@ def main():
                     conn.sendall('exit'.encode())
                     exit_event.set()  # Set exit event to signal thread to exit
                     break
-                elif message.lower() == 'ca-save':
-                    with console_lock:
-                        console.save_text("chat_history.txt")
-                    console.print("[bold green]Chat history saved to 'chat_history.txt'[/bold green]")
                 else:
                     timestamp = datetime.now().strftime('%H:%M:%S')
                     conn.sendall(f"{timestamp}|{username}|{message}".encode())
